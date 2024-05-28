@@ -16,7 +16,20 @@ client.on('ready', () => {
 });
 
 client.on('messageCreate', (message) => {
-  // ... (rest of the code remains the same)
+  if (message.author.bot) return; // Ignore messages from other bots
+
+  if (message.content.startsWith(PREFIX)) {
+    const [CMD_NAME, ...args] = message.content
+      .trim()
+      .substring(PREFIX.length)
+      .split(/\s+/);
+
+    if (CMD_NAME === 'hello') {
+      message.reply('Hello! How can I assist you today?');
+    } else if (CMD_NAME === 'ping') {
+      message.reply('Pong!');
+    }
+  }
 });
 
 client.login(process.env.BOT_TOKEN);

@@ -38,7 +38,7 @@ This is a boilerplate project for creating a Discord bot using JavaScript and th
 
 6. Start the bot:
    ```bash
-   node bot.js
+   node main.js
    ```
 
 ## Project Structure
