@@ -52,6 +52,7 @@ This is a boilerplate project for creating a Discord bot using JavaScript and th
 
 - [discord.js](https://discord.js.org/) - A powerful JavaScript library for interacting with the Discord API.
 - [dotenv](https://www.npmjs.com/package/dotenv) - Loads environment variables from a `.env` file into `process.env`.
+- npm install @discordjs/builders
 
 ## Contributing
 
