@@ -6,7 +6,7 @@ module.exports = async (message, args) => {
   if (!args[0]) {
     return message.reply('Please provide an image filename.');
   }
-  const imagePath = path.join(__dirname, '..', 'images', args[0]);
+  const imagePath = path.join(__dirname, '..', '..', 'images', args[0]);
   try {
     await fs.access(imagePath);
     const attachment = new AttachmentBuilder(imagePath);

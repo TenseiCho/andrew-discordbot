@@ -2,7 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 
 module.exports = async (message) => {
-  const imagesDir = path.join(__dirname, '..', 'images');
+  const imagesDir = path.join(__dirname, '..', '..', 'images');
   try {
     const files = await fs.readdir(imagesDir);
     const imageFiles = files.filter(file => /\.(png|jpe?g|gif|webp)$/i.test(file));
