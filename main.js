@@ -12,12 +12,19 @@ const client = new Client({
 });
 
 client.commands = new Collection();
-const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-  const command = require(path.join(commandsPath, file));
-  client.commands.set(file.slice(0, -3), command);
+const loadCommands = (dir) => {
+  const commandFiles = fs.readdirSync(path.join(__dirname, dir)).filter(file => file.endsWith('.js'));
+  for (const file of commandFiles) {
+    const command = require(path.join(__dirname, dir, file));
+    const commandName = file.slice(0, -3);
+    client.commands.set(commandName, command);
+  }
+};
+
+const commandFolders = fs.readdirSync(path.join(__dirname, 'commands'));
+for (const folder of commandFolders) {
+  loadCommands(path.join('commands', folder));
 }
 
 const PREFIX = '!'; // Change this to your desired prefix
