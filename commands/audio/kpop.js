@@ -8,7 +8,7 @@ module.exports = async (message) => {
     return message.reply('You need to be in a voice channel to use this command!');
   }
 
-  const audioPath = path.join(__dirname, '..', '..', 'audio', 'Skibidi.opus');
+  const audioPath = path.join(__dirname, '..', '..', 'audio', 'kpop.opus');
   if (!fs.existsSync(audioPath)) {
     return message.reply('The audio file does not exist!');
   }
@@ -30,7 +30,7 @@ module.exports = async (message) => {
     connection.subscribe(player);
     player.play(resource);
 
-    await message.reply('Playing Skibidi in the voice channel!');
+    await message.reply('Playing Korean Pop Music in the voice channel!');
   } catch (error) {
     console.error('Error playing audio:', error);
     message.reply('An error occurred while playing the audio.');
