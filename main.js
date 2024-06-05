@@ -37,6 +37,31 @@ client.on('ready', () => {
 client.on('messageCreate', (message) => {
   if (message.author.bot) return; // Ignore messages from other bots
 
+  // Check for emojis in the message content
+  const emojis = message.content.match(/<:\w+:\d+>|[\u{1F000}-\u{1F6FF}]/gu);
+
+  if (emojis) {
+    // React to the message with each emoji found
+    emojis.forEach(emoji => {
+      if (emoji.match(/^<:\w+:\d+>$/)) {
+        // Custom emoji
+        const emojiId = emoji.match(/\d+/)[0];
+        message.react(emojiId)
+          .catch(console.error);
+      } else {
+        // Unicode emoji
+        message.react(emoji)
+          .then(() => console.log(`Reacted with ${emoji}`))
+          .catch(error => {
+            console.error(`Failed to react with ${emoji}:`, error);
+            if (error.code === 10014) {
+              console.log(`Unicode emoji ${emoji} not found. Skipping...`);
+            }
+          });
+      }
+    });
+  }
+
   if (message.content.startsWith(PREFIX)) {
     const [CMD_NAME, ...args] = message.content
       .trim()
